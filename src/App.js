@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import TripPage from './components/TripPage';
 import ProfilePage from './components/ProfilePage';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/trip/:id" element={<TripPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
             </Routes>
+            <Footer />
         </Router>
     );
 }
