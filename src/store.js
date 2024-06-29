@@ -1,28 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-// Placeholder reducers (to be implemented)
-const authReducer = (state = {}, action) => {
-    switch (action.type) {
-        default:
-            return state;
-    }
-};
-
-const tripReducer = (state = {}, action) => {
-    switch (action.type) {
-        default:
-            return state;
-    }
-};
-
-const collaborationReducer = (state = {}, action) => {
-    switch (action.type) {
-        default:
-            return state;
-    }
-};
+import authReducer from './reducers/authReducer';
+import tripReducer from './reducers/tripReducer';
+import collaborationReducer from './reducers/collaborationReducer';
 
 // Combine reducers
 const rootReducer = combineReducers({
