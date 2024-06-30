@@ -7,7 +7,7 @@ const TripPage = () => {
     const [activities, setActivities] = useState([]);
     const [sharedWith, setSharedWith] = useState([]);
     const [shareUserId, setShareUserId] = useState('');
-    const jwtToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3RVc2VySWQiLCJpYXQiOjE3MTk3MjQ5NDUsImV4cCI6MTcxOTcyODU0NX0.oXCVeedAJrYLzy-G0KWSSyVofIlBgjcuSu5_db-18mw'; // Use the new JWT token
+    const jwtToken = localStorage.getItem('jwtToken'); // Retrieve the JWT token from local storage
     console.log('JWT Token:', jwtToken); // Log the JWT token
 
     const socketRef = useRef(null);
@@ -55,6 +55,7 @@ const TripPage = () => {
     };
 
     const shareTrip = () => {
+        console.log('Sharing trip with user ID:', shareUserId); // Log the user ID being shared with
         fetch(`http://localhost:5000/api/trip/${tripId}/share`, { // Use the dynamic tripId
             method: 'POST',
             headers: {
