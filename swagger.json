@@ -218,6 +218,44 @@
           }
         }
       }
+    },
+    "/optimize": {
+      "post": {
+        "summary": "Optimize route",
+        "description": "Optimize a travel route based on origin, destination, and waypoints",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "origin": {
+                  "type": "string"
+                },
+                "destination": {
+                  "type": "string"
+                },
+                "waypoints": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Route optimized successfully"
+          },
+          "500": {
+            "description": "Error optimizing route"
+          }
+        }
+      }
     }
   },
   "definitions": {
