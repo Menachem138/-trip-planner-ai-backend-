@@ -111,10 +111,12 @@ router.post('/:id/share', authMiddleware, async (req, res) => {
     try {
         const objectId = new mongoose.Types.ObjectId(userId);
         console.log('Converted ObjectId:', objectId); // Log the converted ObjectId
+        console.log('SharedWith before:', trip.sharedWith.map(id => id.toString())); // Log the sharedWith array before comparison
         if (!trip.sharedWith.map(id => id.toString()).includes(objectId.toString())) {
             trip.sharedWith.push(objectId);
             await trip.save();
         }
+        console.log('SharedWith after:', trip.sharedWith.map(id => id.toString())); // Log the sharedWith array after comparison
         res.status(200).json({ message: 'Trip shared successfully', trip });
     } catch (error) {
         console.error('Error sharing trip:', error); // Log the error
