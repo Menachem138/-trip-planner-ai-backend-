@@ -176,7 +176,7 @@
           "404": {
             "description": "Trip not found"
           }
-        }
+        ]
       }
     },
     "/optimize": {
@@ -214,7 +214,47 @@
           "500": {
             "description": "Error optimizing route"
           }
-        },
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/recommendations": {
+      "post": {
+        "summary": "Get activity recommendations",
+        "description": "Get activity recommendations based on user preferences",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tripId": {
+                  "type": "string"
+                },
+                "preferences": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recommendations retrieved successfully"
+          },
+          "500": {
+            "description": "Error retrieving recommendations"
+          }
+        ],
         "security": [
           {
             "Bearer": []
