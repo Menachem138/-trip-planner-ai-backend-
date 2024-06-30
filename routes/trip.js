@@ -3,6 +3,7 @@ const router = express.Router();
 const Trip = require('../models/Trip');
 const authMiddleware = require('../middleware/authMiddleware');
 const { makePrediction } = require('../ai');
+const mongoose = require('mongoose');
 
 // Create a new trip
 router.post('/', authMiddleware, async (req, res) => {
@@ -106,11 +107,19 @@ router.post('/:id/share', authMiddleware, async (req, res) => {
         return res.status(404).json({ message: 'Trip not found' });
     }
     const { userId } = req.body;
-    if (!trip.sharedWith.includes(userId)) {
-        trip.sharedWith.push(userId);
-        await trip.save();
+    console.log('Received userId:', userId); // Log the received userId
+    try {
+        const objectId = new mongoose.Types.ObjectId(userId);
+        console.log('Converted ObjectId:', objectId); // Log the converted ObjectId
+        if (!trip.sharedWith.map(id => id.toString()).includes(objectId.toString())) {
+            trip.sharedWith.push(objectId);
+            await trip.save();
+        }
+        res.status(200).json({ message: 'Trip shared successfully', trip });
+    } catch (error) {
+        console.error('Error sharing trip:', error); // Log the error
+        res.status(400).json({ message: 'Invalid user ID' });
     }
-    res.status(200).json({ message: 'Trip shared successfully', trip });
 });
 
 // Get all trips shared with a specific user
