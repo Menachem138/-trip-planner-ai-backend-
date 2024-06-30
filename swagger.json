@@ -76,12 +76,7 @@
           "400": {
             "description": "Invalid input"
           }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        }
       }
     },
     "/trip/{id}": {
@@ -103,12 +98,7 @@
           "404": {
             "description": "Trip not found"
           }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        }
       },
       "put": {
         "summary": "Update trip details",
@@ -136,12 +126,7 @@
           "404": {
             "description": "Trip not found"
           }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        }
       },
       "delete": {
         "summary": "Delete a trip",
@@ -161,12 +146,7 @@
           "404": {
             "description": "Trip not found"
           }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        }
       }
     },
     "/trip/{id}/recommendations": {
@@ -196,12 +176,7 @@
           "404": {
             "description": "Trip not found"
           }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        }
       }
     }
   },
