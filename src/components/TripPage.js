@@ -69,6 +69,7 @@ const TripPage = () => {
             if (data.message === 'Trip shared successfully') {
                 setSharedWith([...sharedWith, shareUserId]);
                 setShareUserId('');
+                socketRef.current.emit('tripShared', tripId, { userId: shareUserId });
             } else {
                 console.error('Error sharing trip:', data.message);
             }
