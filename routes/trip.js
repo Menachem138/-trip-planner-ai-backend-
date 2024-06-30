@@ -4,6 +4,7 @@ const Trip = require('../models/Trip');
 const authMiddleware = require('../middleware/authMiddleware');
 const { makePrediction } = require('../ai');
 const mongoose = require('mongoose');
+const { optimizeRoute } = require('../routeOptimization');
 
 // Create a new trip
 router.post('/', authMiddleware, async (req, res) => {
@@ -94,10 +95,12 @@ router.post('/:id/optimize-route', authMiddleware, async (req, res) => {
     if (!trip) {
         return res.status(404).json({ message: 'Trip not found' });
     }
-    const preferences = req.body.preferences;
-    // Simulate optimized route (replace with real integration)
-    const optimizedRoute = ["location1", "location2", "location3"];
-    res.json({ optimizedRoute });
+    try {
+        const optimizedRoute = await optimizeRoute(trip);
+        res.json({ optimizedRoute });
+    } catch (error) {
+        res.status(500).json({ message: 'Error optimizing route', error });
+    }
 });
 
 // Share a trip with another user
