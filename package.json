@@ -59,5 +59,9 @@
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.4"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
   }
 }
