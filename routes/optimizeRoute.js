@@ -7,6 +7,9 @@ const client = new Client({});
 router.post('/optimize', async (req, res) => {
     const { origin, destination, waypoints } = req.body;
 
+    // Log the received parameters
+    console.log('Received parameters:', { origin, destination, waypoints });
+
     try {
         const response = await client.directions({
             params: {
