@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { useParams } from 'react-router-dom';
 
@@ -10,15 +10,19 @@ const TripPage = () => {
     const jwtToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3RVc2VySWQiLCJpYXQiOjE3MTk3MjQ5NDUsImV4cCI6MTcxOTcyODU0NX0.oXCVeedAJrYLzy-G0KWSSyVofIlBgjcuSu5_db-18mw'; // Use the new JWT token
     console.log('JWT Token:', jwtToken); // Log the JWT token
 
-    const socket = io('http://localhost:5000', {
-        auth: { token: jwtToken },
-        withCredentials: true,
-        extraHeaders: {
-            Authorization: `Bearer ${jwtToken}`
-        }
-    });
+    const socketRef = useRef(null);
 
     useEffect(() => {
+        const socket = io('http://localhost:5000', {
+            auth: { token: jwtToken },
+            withCredentials: true,
+            extraHeaders: {
+                Authorization: `Bearer ${jwtToken}`
+            }
+        });
+
+        socketRef.current = socket;
+
         // Join the trip room
         socket.emit('joinTrip', tripId);
 
@@ -42,12 +46,12 @@ const TripPage = () => {
             socket.emit('leaveTrip', tripId);
             socket.disconnect();
         };
-    }, [socket, tripId]);
+    }, [tripId, jwtToken]);
 
     const addActivity = (activity) => {
         const updatedActivities = [...activities, activity];
         setActivities(updatedActivities);
-        socket.emit('tripUpdated', tripId, { activities: updatedActivities });
+        socketRef.current.emit('tripUpdated', tripId, { activities: updatedActivities });
     };
 
     const shareTrip = () => {
