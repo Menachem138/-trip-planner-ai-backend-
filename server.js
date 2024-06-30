@@ -6,6 +6,9 @@ const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
@@ -53,6 +56,9 @@ const tripRouter = require('./routes/trip');
 
 app.use('/api/user', userRouter);
 app.use('/api/trip', tripRouter);
+
+// Serve Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 io.use((socket, next) => {
     const token = socket.handshake.auth.token;

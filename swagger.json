@@ -5,11 +5,7 @@
     "version": "1.0.0",
     "description": "API documentation for the Trip Planner AI application"
   },
-  "host": "localhost:5000",
   "basePath": "/api",
-  "schemes": [
-    "http"
-  ],
   "paths": {
     "/user/register": {
       "post": {
