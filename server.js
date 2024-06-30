@@ -55,11 +55,13 @@ const userRouter = require('./routes/user');
 const tripRouter = require('./routes/trip');
 const optimizeRouteRouter = require('./routes/optimizeRoute');
 const recommendationsRouter = require('./routes/recommendations');
+const expediaApiRouter = require('./routes/expediaApi'); // Add the Expedia API router
 
 app.use('/api/user', userRouter);
 app.use('/api/trip', tripRouter);
 app.use('/api', optimizeRouteRouter); // Updated to mount at /api
 app.use('/api', recommendationsRouter); // Mount recommendations router at /api
+app.use('/api/expedia', expediaApiRouter); // Mount Expedia API router at /api/expedia
 
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

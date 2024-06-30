@@ -259,6 +259,20 @@
           }
         }
       }
+    },
+    "/expedia/travel": {
+      "get": {
+        "summary": "Fetch travel data from Expedia",
+        "description": "Retrieve travel data from the Expedia API",
+        "responses": {
+          "200": {
+            "description": "Travel data retrieved successfully"
+          },
+          "500": {
+            "description": "Error fetching travel data"
+          }
+        }
+      }
     }
   },
   "definitions": {
