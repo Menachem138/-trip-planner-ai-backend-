@@ -116,3 +116,6 @@ server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log('JWT_SECRET:', process.env.JWT_SECRET); // Log the JWT_SECRET to verify it's set correctly
 });
+
+// Import and use the collaboration module
+require('./collaboration')(io);
