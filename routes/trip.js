@@ -99,4 +99,24 @@ router.post('/:id/optimize-route', authMiddleware, async (req, res) => {
     res.json({ optimizedRoute });
 });
 
+// Share a trip with another user
+router.post('/:id/share', authMiddleware, async (req, res) => {
+    const trip = await Trip.findById(req.params.id);
+    if (!trip) {
+        return res.status(404).json({ message: 'Trip not found' });
+    }
+    const { userId } = req.body;
+    if (!trip.sharedWith.includes(userId)) {
+        trip.sharedWith.push(userId);
+        await trip.save();
+    }
+    res.status(200).json({ message: 'Trip shared successfully', trip });
+});
+
+// Get all trips shared with a specific user
+router.get('/shared/:userId', authMiddleware, async (req, res) => {
+    const trips = await Trip.find({ sharedWith: req.params.userId });
+    res.json(trips);
+});
+
 module.exports = router;
