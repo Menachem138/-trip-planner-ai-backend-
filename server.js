@@ -53,9 +53,11 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 const userRouter = require('./routes/user');
 const tripRouter = require('./routes/trip');
+const optimizeRouteRouter = require('./routes/optimizeRoute');
 
 app.use('/api/user', userRouter);
 app.use('/api/trip', tripRouter);
+app.use('/api/optimize', optimizeRouteRouter);
 
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
