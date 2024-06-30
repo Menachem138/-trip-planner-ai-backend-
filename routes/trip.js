@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Trip = require('../models/Trip');
 const authMiddleware = require('../middleware/authMiddleware');
-const { makePrediction } = require('../ai');
 const mongoose = require('mongoose');
 const { optimizeRoute } = require('../routeOptimization');
+const { recommendActivities } = require('../activityRecommendation');
 
 // Create a new trip
 router.post('/', authMiddleware, async (req, res) => {
@@ -85,7 +85,7 @@ router.post('/:id/recommendations', authMiddleware, async (req, res) => {
         return res.status(404).json({ message: 'Trip not found' });
     }
     const userPreferences = req.body.userPreferences;
-    const recommendedActivities = makePrediction(userPreferences);
+    const recommendedActivities = await recommendActivities(userPreferences, trip);
     res.json({ recommendedActivities });
 });
 
