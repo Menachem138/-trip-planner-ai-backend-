@@ -5,6 +5,7 @@ const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
@@ -19,6 +20,20 @@ const tripRouter = require('./routes/trip');
 
 app.use('/api/user', userRouter);
 app.use('/api/trip', tripRouter);
+
+io.use((socket, next) => {
+    const token = socket.handshake.auth.token;
+    if (!token) {
+        return next(new Error('Authentication error'));
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        socket.user = decoded;
+        next();
+    } catch (err) {
+        next(new Error('Authentication error'));
+    }
+});
 
 io.on('connection', (socket) => {
     console.log('New client connected');
