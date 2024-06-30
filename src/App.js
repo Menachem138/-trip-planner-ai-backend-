@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import TripPage from './components/TripPage';
 import ProfilePage from './components/ProfilePage';
 import LoginPage from './components/LoginPage'; // Import LoginPage component
+import SignupPage from './components/SignupPage'; // Import SignupPage component
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/trip/:id" element={<TripPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/login" element={<LoginPage />} /> {/* Add route for login page */}
+                <Route path="/signup" element={<SignupPage />} /> {/* Add route for signup page */}
             </Routes>
             <Footer />
         </Router>
