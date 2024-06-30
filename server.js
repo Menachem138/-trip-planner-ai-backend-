@@ -42,7 +42,7 @@ app.options('*', (req, res) => {
 
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI);
 
 const userRouter = require('./routes/user');
 const tripRouter = require('./routes/trip');
