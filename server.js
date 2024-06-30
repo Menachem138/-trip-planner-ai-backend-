@@ -42,6 +42,7 @@ app.options('*', (req, res) => {
 
 app.use(express.json());
 
+console.log('MONGODB_URI:', process.env.MONGODB_URI); // Log the MONGODB_URI to verify it's set correctly
 mongoose.connect(process.env.MONGODB_URI);
 
 const userRouter = require('./routes/user');
