@@ -21,6 +21,22 @@ app.use('/api/trip', tripRouter);
 
 io.on('connection', (socket) => {
     console.log('New client connected');
+
+    socket.on('joinTrip', (tripId) => {
+        socket.join(tripId);
+        console.log(`Client joined trip: ${tripId}`);
+    });
+
+    socket.on('leaveTrip', (tripId) => {
+        socket.leave(tripId);
+        console.log(`Client left trip: ${tripId}`);
+    });
+
+    socket.on('tripUpdated', (tripId, update) => {
+        io.to(tripId).emit('tripUpdated', update);
+        console.log(`Trip ${tripId} updated: ${JSON.stringify(update)}`);
+    });
+
     socket.on('disconnect', () => {
         console.log('Client disconnected');
     });
