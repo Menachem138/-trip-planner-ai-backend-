@@ -11,7 +11,7 @@ function App() {
         <Router>
             <Header />
             <Routes>
-                <Route path="/" exact element={<HomePage />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/trip/:id" element={<TripPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
             </Routes>
