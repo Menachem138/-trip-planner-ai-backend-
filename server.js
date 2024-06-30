@@ -57,7 +57,7 @@ const optimizeRouteRouter = require('./routes/optimizeRoute');
 
 app.use('/api/user', userRouter);
 app.use('/api/trip', tripRouter);
-app.use('/api/optimize', optimizeRouteRouter);
+app.use('/api', optimizeRouteRouter); // Updated to mount at /api
 
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
