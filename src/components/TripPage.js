@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom';
 const TripPage = () => {
     const { id: tripId } = useParams();
     const [activities, setActivities] = useState([]);
-    const socket = io('http://localhost:5000');
+    const jwtToken = localStorage.getItem('token');
+    const socket = io('http://localhost:5000', { auth: { token: jwtToken } });
 
     useEffect(() => {
         // Join the trip room
@@ -14,6 +15,11 @@ const TripPage = () => {
         // Listen for trip updates
         socket.on('tripUpdated', (update) => {
             setActivities(update.activities);
+        });
+
+        // Handle connection errors
+        socket.on('connect_error', (err) => {
+            console.error('Connection error:', err.message);
         });
 
         // Cleanup on component unmount
