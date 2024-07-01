@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const BOOKING_API_KEY = process.env.BOOKING_API_KEY;
+const BOOKING_API_KEY = process.env.open_ai_open_ai;
 
 const bookingApi = axios.create({
     baseURL: 'https://api.booking.com',
@@ -11,7 +11,7 @@ const bookingApi = axios.create({
 
 const searchHotels = async (query) => {
     try {
-        const response = await bookingApi.get('/search', {
+        const response = await bookingApi.get('/accommodations/search', {
             params: query
         });
         return response.data;
