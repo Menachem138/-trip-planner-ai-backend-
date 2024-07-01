@@ -4,10 +4,12 @@ require('dotenv').config();
 const BOOKING_API_KEY = process.env.BOOKING_API_KEY;
 console.log('BOOKING_API_KEY:', BOOKING_API_KEY); // Log the BOOKING_API_KEY to verify it's set correctly
 
+const encodedApiKey = 'c2stODJKZzdURkYyZTlhdjc5T1phRWJUM0JsYmtGSlN1Y2RMUldtbzFKTmE5eFVETEhB'; // Manually encoded API key
+
 const bookingApi = axios.create({
     baseURL: 'https://supply-xml.booking.com/hotels/xml/availability',
     headers: {
-        'Authorization': `Basic ${Buffer.from(BOOKING_API_KEY).toString('base64')}`,
+        'Authorization': `Basic ${encodedApiKey}`,
         'Content-Type': 'application/xml',
         'Accept-Version': '1.1'
     }
