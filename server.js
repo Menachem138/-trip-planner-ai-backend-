@@ -57,6 +57,7 @@ const optimizeRouteRouter = require('./routes/optimizeRoute');
 const recommendationsRouter = require('./routes/recommendations');
 const expediaApiRouter = require('./routes/expediaApi'); // Add the Expedia API router
 const bookingRouter = require('./routes/bookingRoutes'); // Add the Booking API router
+const amadeusRouter = require('./routes/amadeus'); // Add the Amadeus API router
 
 app.use('/api/user', userRouter);
 app.use('/api/trip', tripRouter);
@@ -64,6 +65,7 @@ app.use('/api', optimizeRouteRouter); // Updated to mount at /api
 app.use('/api', recommendationsRouter); // Mount recommendations router at /api
 app.use('/api/expedia', expediaApiRouter); // Mount Expedia API router at /api/expedia
 app.use('/api/booking', bookingRouter); // Mount Booking API router at /api/booking
+app.use('/api/amadeus', amadeusRouter); // Mount Amadeus API router at /api/amadeus
 
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
