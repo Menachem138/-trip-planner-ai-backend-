@@ -273,6 +273,82 @@
           }
         }
       }
+    },
+    "/booking/search": {
+      "get": {
+        "summary": "Search hotels",
+        "description": "Search for hotels using the Booking.com API",
+        "responses": {
+          "200": {
+            "description": "Hotels searched successfully"
+          },
+          "500": {
+            "description": "Error searching hotels"
+          }
+        }
+      }
+    },
+    "/booking/details/{id}": {
+      "get": {
+        "summary": "Get booking details",
+        "description": "Retrieve booking details by ID using the Booking.com API",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking details retrieved successfully"
+          },
+          "404": {
+            "description": "Booking not found"
+          }
+        }
+      }
+    },
+    "/booking/reserve": {
+      "post": {
+        "summary": "Manage reservations",
+        "description": "Manage reservations using the Booking.com API",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hotelId": {
+                  "type": "string"
+                },
+                "checkInDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "checkOutDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "guests": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservation managed successfully"
+          },
+          "500": {
+            "description": "Error managing reservation"
+          }
+        }
+      }
     }
   },
   "definitions": {
