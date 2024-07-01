@@ -5,7 +5,7 @@ module.exports = {
   moduleFileExtensions: ["js", "jsx"],
   testEnvironment: "node",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-  transformIgnorePatterns: ["<rootDir>/node_modules/"],
+  transformIgnorePatterns: ["/node_modules/(?!(axios)/)"],
   globals: {
     "babel-jest": {
       plugins: [
