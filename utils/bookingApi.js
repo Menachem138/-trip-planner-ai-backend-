@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const BOOKING_API_KEY = process.env.open_ai_open_ai;
+const BOOKING_API_KEY = process.env.BOOKING_API_KEY;
 
 const bookingApi = axios.create({
     baseURL: 'https://api.booking.com',
