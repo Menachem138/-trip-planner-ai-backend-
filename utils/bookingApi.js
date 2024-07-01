@@ -5,7 +5,7 @@ const BOOKING_API_KEY = process.env.BOOKING_API_KEY;
 console.log('BOOKING_API_KEY:', BOOKING_API_KEY); // Log the BOOKING_API_KEY to verify it's set correctly
 
 const bookingApi = axios.create({
-    baseURL: 'https://api.booking.com',
+    baseURL: 'https://demandapi.booking.com/3.1/',
     headers: {
         'Authorization': `Bearer ${BOOKING_API_KEY}`
     }
