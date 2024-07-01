@@ -45,8 +45,8 @@ app.options('*', (req, res) => {
 
 app.use(express.json());
 
-console.log('MONGODB_URI:', process.env.MONGODB_URI); // Log the MONGODB_URI to verify it's set correctly
-mongoose.connect(process.env.MONGODB_URI, {
+console.log('MONGO_URI:', process.env.MONGO_URI); // Log the MONGO_URI to verify it's set correctly
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -56,12 +56,14 @@ const tripRouter = require('./routes/trip');
 const optimizeRouteRouter = require('./routes/optimizeRoute');
 const recommendationsRouter = require('./routes/recommendations');
 const expediaApiRouter = require('./routes/expediaApi'); // Add the Expedia API router
+const bookingRouter = require('./routes/bookingRoutes'); // Add the Booking API router
 
 app.use('/api/user', userRouter);
 app.use('/api/trip', tripRouter);
 app.use('/api', optimizeRouteRouter); // Updated to mount at /api
 app.use('/api', recommendationsRouter); // Mount recommendations router at /api
 app.use('/api/expedia', expediaApiRouter); // Mount Expedia API router at /api/expedia
+app.use('/api/booking', bookingRouter); // Mount Booking API router at /api/booking
 
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
