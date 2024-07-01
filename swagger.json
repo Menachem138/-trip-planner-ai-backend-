@@ -349,6 +349,59 @@
           }
         }
       }
+    },
+    "/amadeus/hotels": {
+      "get": {
+        "summary": "Search hotels",
+        "description": "Search for hotels using the Amadeus API",
+        "parameters": [
+          {
+            "name": "cityCode",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The IATA city code for the city where the hotel is located"
+          },
+          {
+            "name": "checkInDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "description": "The check-in date for the hotel stay"
+          },
+          {
+            "name": "checkOutDate",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "description": "The check-out date for the hotel stay"
+          },
+          {
+            "name": "roomQuantity",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "description": "The number of rooms required"
+          },
+          {
+            "name": "adults",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "description": "The number of adults staying in the hotel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hotels searched successfully"
+          },
+          "500": {
+            "description": "Error searching hotels"
+          }
+        }
+      }
     }
   },
   "definitions": {
