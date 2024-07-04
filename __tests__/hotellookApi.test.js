@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const HOTELLOOK_API_KEY = process.env.HOTELLOOK_API_KEY;
 const HOTELLOOK_MARKER = process.env.HOTELLOOK_MARKER;
+const PARTNER_ID = process.env.PARTNER_ID;
 
 const testHotellookApi = async () => {
     const query = {
@@ -17,10 +18,11 @@ const testHotellookApi = async () => {
     };
 
     try {
-        const response = await axios.get('https://yasen.hotellook.com/api/v2/cache.json', {
+        const response = await axios.get('https://engine.hotellook.com/api/v2/search/start.json', {
             params: {
                 ...query,
                 marker: HOTELLOOK_MARKER,
+                partner_id: PARTNER_ID,
                 signature: generateSignature(query)
             },
             headers: {
