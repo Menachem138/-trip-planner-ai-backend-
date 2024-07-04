@@ -51,13 +51,6 @@ mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true
 });
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 const userRouter = require('./routes/user');
 const tripRouter = require('./routes/trip');
 const optimizeRouteRouter = require('./routes/optimizeRoute');
@@ -125,6 +118,13 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log('JWT_SECRET:', process.env.JWT_SECRET); // Log the JWT_SECRET to verify it's set correctly
+});
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // Import and use the collaboration module
