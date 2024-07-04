@@ -7,9 +7,15 @@ const testAviasalesApi = async () => {
     const query = {
         origin: 'NYC',
         destination: 'LAX',
-        depart_date: '2024-07-01',
-        return_date: '2024-07-05',
-        adults: 1
+        departure_at: '2024-07-01',
+        return_at: '2024-07-05',
+        one_way: false,
+        direct: false,
+        currency: 'USD',
+        limit: 30,
+        page: 1,
+        sorting: 'price',
+        unique: false
     };
 
     try {
