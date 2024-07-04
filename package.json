@@ -34,8 +34,7 @@
     "build": "npm run build:css && react-scripts build",
     "test": "jest --config jest.config.jsdom.js --watchAll=false",
     "test:jsdom": "jest --config jest.config.jsdom.js --watchAll=false",
-    "test:node": "jest --config jest.config.js --watchAll=false",
-    "eject": "react-scripts eject"
+    "test:node": "jest --config jest.config.js --watchAll=false"
   },
   "eslintConfig": {
     "extends": [

@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const AVIASALES_API_KEY = process.env.open_ai_open_ai;
+const AVIASALES_API_KEY = process.env.AVIASALES_API_KEY;
 
 const aviasalesApi = axios.create({
     baseURL: 'https://api.travelpayouts.com/aviasales/v3/',
