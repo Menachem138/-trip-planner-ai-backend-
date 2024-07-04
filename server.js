@@ -46,6 +46,8 @@ app.options('*', (req, res) => {
 app.use(express.json());
 
 console.log('MONGO_URI:', process.env.MONGO_URI); // Log the MONGO_URI to verify it's set correctly
+console.log('AVIASALES_API_KEY:', process.env.AVIASALES_API_KEY); // Log the AVIASALES_API_KEY to verify it's set correctly
+console.log('HOTELLOOK_API_KEY:', process.env.HOTELLOOK_API_KEY); // Log the HOTELLOOK_API_KEY to verify it's set correctly
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
