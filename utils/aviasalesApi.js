@@ -12,7 +12,20 @@ const aviasalesApi = axios.create({
 const searchFlights = async (query) => {
     try {
         const response = await aviasalesApi.get('prices_for_dates', {
-            params: query
+            params: {
+                origin: query.origin,
+                destination: query.destination,
+                departure_at: query.departure_at,
+                return_at: query.return_at,
+                one_way: query.one_way || false,
+                direct: query.direct || false,
+                currency: query.currency || 'USD',
+                limit: query.limit || 30,
+                page: query.page || 1,
+                sorting: query.sorting || 'price',
+                unique: query.unique || false,
+                token: AVIASALES_API_KEY
+            }
         });
         return response.data;
     } catch (error) {
