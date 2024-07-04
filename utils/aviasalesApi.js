@@ -23,8 +23,7 @@ const searchFlights = async (query) => {
                 limit: query.limit || 30,
                 page: query.page || 1,
                 sorting: query.sorting || 'price',
-                unique: query.unique || false,
-                token: AVIASALES_API_KEY
+                unique: query.unique || false
             }
         });
         return response.data;
