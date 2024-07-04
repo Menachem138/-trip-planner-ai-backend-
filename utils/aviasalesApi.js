@@ -14,7 +14,6 @@ const searchFlights = async (query) => {
         const response = await aviasalesApi.get('prices_for_dates', {
             params: query
         });
-        console.log('Aviasales API response:', response.data); // Added logging
         return response.data;
     } catch (error) {
         console.error('Error searching flights:', error);
