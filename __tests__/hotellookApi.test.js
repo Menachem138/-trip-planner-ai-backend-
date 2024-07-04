@@ -2,6 +2,8 @@ const axios = require('axios');
 const crypto = require('crypto');
 require('dotenv').config();
 
+jest.mock('axios');
+
 const HOTELLOOK_API_KEY = process.env.HOTELLOOK_API_KEY;
 const HOTELLOOK_MARKER = process.env.HOTELLOOK_MARKER;
 const PARTNER_ID = process.env.PARTNER_ID;
