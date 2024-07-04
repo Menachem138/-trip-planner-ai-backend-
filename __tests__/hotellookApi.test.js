@@ -8,7 +8,9 @@ const PARTNER_ID = process.env.PARTNER_ID;
 
 const getExternalIP = async () => {
     try {
+        console.log('Fetching external IP...');
         const response = await axios.get('https://api.ipify.org?format=json');
+        console.log('External IP fetched:', response.data.ip);
         return response.data.ip;
     } catch (error) {
         console.error('Error fetching external IP:', error.message);
@@ -17,6 +19,7 @@ const getExternalIP = async () => {
 };
 
 const testHotellookApi = async () => {
+    console.log('Starting testHotellookApi...');
     const customerIP = await getExternalIP();
     const query = {
         adultsCount: 2,
@@ -67,7 +70,9 @@ const generateSignature = (params) => {
 
 describe('Hotellook API', () => {
     test('should return hotel data', async () => {
+        console.log('Running Hotellook API test...');
         const data = await testHotellookApi();
+        console.log('Test data received:', data);
         expect(data).toHaveProperty('searchId');
         expect(data).toHaveProperty('hotels');
         expect(Array.isArray(data.hotels)).toBe(true);
