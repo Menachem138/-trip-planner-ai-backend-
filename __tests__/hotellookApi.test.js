@@ -62,6 +62,7 @@ const testHotellookApi = async () => {
         console.log('Hotellook API headers:', response.headers);
         return response.data;
     } catch (error) {
+        console.log('Error occurred in testHotellookApi');
         if (error.response) {
             console.error('Error response data:', error.response.data);
             console.error('Error response status:', error.response.status);
