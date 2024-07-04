@@ -1,4 +1,5 @@
 const axios = require('axios');
+const crypto = require('crypto');
 require('dotenv').config();
 
 const HOTELLOOK_API_KEY = process.env.HOTELLOOK_API_KEY;
