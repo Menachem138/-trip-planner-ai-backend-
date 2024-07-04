@@ -29,6 +29,10 @@ const testHotellookApi = async () => {
     };
 
     try {
+        console.log('Request query:', query);
+        console.log('Request marker:', HOTELLOOK_MARKER);
+        console.log('Request partner_id:', PARTNER_ID);
+        console.log('Request signature:', generateSignature(query));
         const response = await axios.get('https://engine.hotellook.com/api/v2/search/start.json', {
             params: {
                 ...query,
