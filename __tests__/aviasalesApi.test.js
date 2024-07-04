@@ -1,7 +1,7 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const AVIASALES_API_KEY = '24d93d4c4db9fdb62c971e20f0aa182f';
+const AVIASALES_API_KEY = process.env.AVIASALES_API_KEY;
 
 const testAviasalesApi = async () => {
     const query = {
@@ -20,13 +20,18 @@ const testAviasalesApi = async () => {
             }
         });
         console.log('Aviasales API response:', response.data);
+        return response.data;
     } catch (error) {
         console.error('Error testing Aviasales API:', error);
+        throw error;
     }
 };
 
 describe('Aviasales API', () => {
     test('should return flight data', async () => {
-        await testAviasalesApi();
+        const data = await testAviasalesApi();
+        expect(data).toHaveProperty('flights');
+        expect(Array.isArray(data.flights)).toBe(true);
+        expect(data.flights.length).toBeGreaterThan(0);
     });
 });
