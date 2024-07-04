@@ -95,6 +95,9 @@ describe('Hotellook API', () => {
             expect(response.data).toHaveProperty('ipString');
         } catch (error) {
             console.error('Error in direct external IP fetch test:', error.message);
+            console.error('Error response status:', error.response ? error.response.status : 'N/A');
+            console.error('Error response headers:', error.response ? error.response.headers : 'N/A');
+            console.error('Error response data:', error.response ? error.response.data : 'N/A');
             throw error;
         }
     });
