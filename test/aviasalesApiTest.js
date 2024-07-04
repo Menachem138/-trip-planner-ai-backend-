@@ -11,7 +11,7 @@ const testAviasalesApi = async () => {
     };
 
     try {
-        const response = await axios.get('http://localhost:5000/api/aviasales/flights', {
+        const response = await axios.get('http://localhost:5000/api/aviasales/prices_for_dates', {
             params: query
         });
         console.log('Aviasales API response:', response.data);
