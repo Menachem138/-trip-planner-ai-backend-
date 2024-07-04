@@ -79,7 +79,7 @@ const generateSignature = (params) => {
         return result;
     }, {});
 
-    const signatureString = `${HOTELLOOK_API_KEY}:${PARTNER_ID}:${sortedParams.adultsCount}:${sortedParams.checkIn}:${sortedParams.checkOut}:${sortedParams.childAge1 || ''}:${sortedParams.childrenCount || 0}:${sortedParams.currency || 'USD'}:${sortedParams.customerIP}:${sortedParams.iata}:${sortedParams.lang || 'en_US'}:${sortedParams.waitForResult || 0}`;
+    const signatureString = `${sortedParams.adultsCount}:${sortedParams.checkIn}:${sortedParams.checkOut}:${sortedParams.childrenCount || 0}:${sortedParams.currency || 'USD'}:${sortedParams.customerIP}:${sortedParams.iata}:${sortedParams.lang || 'en_US'}:${sortedParams.waitForResult || 0}:${HOTELLOOK_API_KEY}:${PARTNER_ID}`;
     return crypto.createHash('md5').update(signatureString).digest('hex');
 };
 
