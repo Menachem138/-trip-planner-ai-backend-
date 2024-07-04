@@ -54,7 +54,8 @@ const testHotellookApi = async () => {
             },
             headers: {
                 'X-Access-Token': HOTELLOOK_API_KEY
-            }
+            },
+            timeout: 10000 // Set timeout to 10 seconds
         });
         console.log('Hotellook API response:', response.data);
         console.log('Hotellook API status:', response.status);
@@ -73,7 +74,20 @@ const testHotellookApi = async () => {
 };
 
 const generateSignature = (params) => {
-    const signatureString = `${HOTELLOOK_API_KEY}:${HOTELLOOK_MARKER}:${params.adultsCount}:${params.checkIn}:${params.checkOut}:${params.childAge1 || ''}:${params.childrenCount || 0}:${params.currency || 'USD'}:${params.customerIP}:${params.iata}:${params.lang || 'en_US'}:${params.waitForResult || 0}`;
+    const sortedParams = {
+        adultsCount: params.adultsCount,
+        checkIn: params.checkIn,
+        checkOut: params.checkOut,
+        childAge1: params.childAge1 || '',
+        childrenCount: params.childrenCount || 0,
+        currency: params.currency || 'USD',
+        customerIP: params.customerIP,
+        iata: params.iata,
+        lang: params.lang || 'en_US',
+        waitForResult: params.waitForResult || 0
+    };
+
+    const signatureString = `${HOTELLOOK_API_KEY}:${HOTELLOOK_MARKER}:${sortedParams.adultsCount}:${sortedParams.checkIn}:${sortedParams.checkOut}:${sortedParams.childAge1}:${sortedParams.childrenCount}:${sortedParams.currency}:${sortedParams.customerIP}:${sortedParams.iata}:${sortedParams.lang}:${sortedParams.waitForResult}`;
     return crypto.createHash('md5').update(signatureString).digest('hex');
 };
 
