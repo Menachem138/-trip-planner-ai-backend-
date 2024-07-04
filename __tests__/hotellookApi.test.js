@@ -74,20 +74,12 @@ const testHotellookApi = async () => {
 };
 
 const generateSignature = (params) => {
-    const sortedParams = {
-        adultsCount: params.adultsCount,
-        checkIn: params.checkIn,
-        checkOut: params.checkOut,
-        childAge1: params.childAge1 || '',
-        childrenCount: params.childrenCount || 0,
-        currency: params.currency || 'USD',
-        customerIP: params.customerIP,
-        iata: params.iata,
-        lang: params.lang || 'en_US',
-        waitForResult: params.waitForResult || 0
-    };
+    const sortedParams = Object.keys(params).sort().reduce((result, key) => {
+        result[key] = params[key];
+        return result;
+    }, {});
 
-    const signatureString = `${HOTELLOOK_API_KEY}:${HOTELLOOK_MARKER}:${sortedParams.adultsCount}:${sortedParams.checkIn}:${sortedParams.checkOut}:${sortedParams.childAge1}:${sortedParams.childrenCount}:${sortedParams.currency}:${sortedParams.customerIP}:${sortedParams.iata}:${sortedParams.lang}:${sortedParams.waitForResult}`;
+    const signatureString = `${HOTELLOOK_API_KEY}:${PARTNER_ID}:${sortedParams.adultsCount}:${sortedParams.checkIn}:${sortedParams.checkOut}:${sortedParams.childAge1 || ''}:${sortedParams.childrenCount || 0}:${sortedParams.currency || 'USD'}:${sortedParams.customerIP}:${sortedParams.iata}:${sortedParams.lang || 'en_US'}:${sortedParams.waitForResult || 0}`;
     return crypto.createHash('md5').update(signatureString).digest('hex');
 };
 
