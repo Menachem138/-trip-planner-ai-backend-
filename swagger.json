@@ -401,6 +401,104 @@
             "description": "Error searching hotels"
           }
         }
+      },
+      "/hotellook/hotels": {
+        "get": {
+          "summary": "Search hotels",
+          "description": "Search for hotels using the Hotellook API",
+          "parameters": [
+            {
+              "name": "location",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "The location for the hotel search"
+            },
+            {
+              "name": "checkIn",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "format": "date",
+              "description": "The check-in date for the hotel stay"
+            },
+            {
+              "name": "checkOut",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "format": "date",
+              "description": "The check-out date for the hotel stay"
+            },
+            {
+              "name": "adults",
+              "in": "query",
+              "required": true,
+              "type": "integer",
+              "description": "The number of adults staying in the hotel"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Hotels searched successfully"
+            },
+            "500": {
+              "description": "Error searching hotels"
+            }
+          }
+        }
+      },
+      "/aviasales/flights": {
+        "get": {
+          "summary": "Search flights",
+          "description": "Search for flights using the Aviasales API",
+          "parameters": [
+            {
+              "name": "origin",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "The origin airport code"
+            },
+            {
+              "name": "destination",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "The destination airport code"
+            },
+            {
+              "name": "departureDate",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "format": "date",
+              "description": "The departure date for the flight"
+            },
+            {
+              "name": "returnDate",
+              "in": "query",
+              "type": "string",
+              "format": "date",
+              "description": "The return date for the flight (if round trip)"
+            },
+            {
+              "name": "adults",
+              "in": "query",
+              "required": true,
+              "type": "integer",
+              "description": "The number of adult passengers"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Flights searched successfully"
+            },
+            "500": {
+              "description": "Error searching flights"
+            }
+          }
+        }
       }
     }
   },
