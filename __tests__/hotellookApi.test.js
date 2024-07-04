@@ -87,19 +87,4 @@ describe('Hotellook API', () => {
         expect(Array.isArray(data.hotels)).toBe(true);
         expect(data.hotels.length).toBeGreaterThan(0);
     });
-
-    test('should fetch external IP directly', async () => {
-        console.log('Running external IP fetch test...');
-        try {
-            const response = await axios.get('https://api.bigdatacloud.net/data/client-ip');
-            console.log('Direct external IP fetch response:', response.data);
-            expect(response.data).toHaveProperty('ipString');
-        } catch (error) {
-            console.error('Error in direct external IP fetch test:', error.message);
-            console.error('Error response status:', error.response ? error.response.status : 'N/A');
-            console.error('Error response headers:', error.response ? error.response.headers : 'N/A');
-            console.error('Error response data:', error.response ? error.response.data : 'N/A');
-            throw error;
-        }
-    });
 });
