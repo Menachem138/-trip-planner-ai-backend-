@@ -32,7 +32,7 @@
     "start": "node server.js",
     "build:css": "tailwindcss -o src/tailwind.output.css --minify",
     "build": "npm run build:css && react-scripts build",
-    "test": "jest --watchAll=false",
+    "test": "jest --config jest.config.jsdom.js --watchAll=false",
     "test:jsdom": "jest --config jest.config.jsdom.js --watchAll=false",
     "test:node": "jest --config jest.config.js --watchAll=false",
     "eject": "react-scripts eject"
