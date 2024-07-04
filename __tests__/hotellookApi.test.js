@@ -6,14 +6,22 @@ const HOTELLOOK_API_KEY = process.env.HOTELLOOK_API_KEY;
 const HOTELLOOK_MARKER = process.env.HOTELLOOK_MARKER;
 const PARTNER_ID = process.env.PARTNER_ID;
 
+console.log('Environment Variables:');
+console.log('HOTELLOOK_API_KEY:', HOTELLOOK_API_KEY);
+console.log('HOTELLOOK_MARKER:', HOTELLOOK_MARKER);
+console.log('PARTNER_ID:', PARTNER_ID);
+
 const getExternalIP = async () => {
     try {
         console.log('Fetching external IP...');
-        const response = await axios.get('https://api.ipify.org?format=json');
-        console.log('External IP fetched:', response.data.ip);
-        return response.data.ip;
+        const response = await axios.get('https://api.bigdatacloud.net/data/client-ip');
+        console.log('External IP fetched:', response.data.ipString);
+        return response.data.ipString;
     } catch (error) {
         console.error('Error fetching external IP:', error.message);
+        console.error('Error response status:', error.response ? error.response.status : 'N/A');
+        console.error('Error response headers:', error.response ? error.response.headers : 'N/A');
+        console.error('Error response data:', error.response ? error.response.data : 'N/A');
         throw error;
     }
 };
@@ -77,5 +85,17 @@ describe('Hotellook API', () => {
         expect(data).toHaveProperty('hotels');
         expect(Array.isArray(data.hotels)).toBe(true);
         expect(data.hotels.length).toBeGreaterThan(0);
+    });
+
+    test('should fetch external IP directly', async () => {
+        console.log('Running external IP fetch test...');
+        try {
+            const response = await axios.get('https://api.bigdatacloud.net/data/client-ip');
+            console.log('Direct external IP fetch response:', response.data);
+            expect(response.data).toHaveProperty('ipString');
+        } catch (error) {
+            console.error('Error in direct external IP fetch test:', error.message);
+            throw error;
+        }
     });
 });
