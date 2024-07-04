@@ -6,12 +6,23 @@ const HOTELLOOK_API_KEY = process.env.HOTELLOOK_API_KEY;
 const HOTELLOOK_MARKER = process.env.HOTELLOOK_MARKER;
 const PARTNER_ID = process.env.PARTNER_ID;
 
+const getExternalIP = async () => {
+    try {
+        const response = await axios.get('https://api.ipify.org?format=json');
+        return response.data.ip;
+    } catch (error) {
+        console.error('Error fetching external IP:', error.message);
+        throw error;
+    }
+};
+
 const testHotellookApi = async () => {
+    const customerIP = await getExternalIP();
     const query = {
         adultsCount: 2,
         checkIn: '2024-07-01',
         checkOut: '2024-07-05',
-        customerIP: '127.0.0.1',
+        customerIP: customerIP,
         iata: 'NYC',
         lang: 'en_US',
         waitForResult: 0
@@ -46,7 +57,7 @@ const testHotellookApi = async () => {
 };
 
 const generateSignature = (params) => {
-    const signatureString = `${HOTELLOOK_API_KEY}:${HOTELLOOK_MARKER}:${params.adultsCount}:${params.checkIn}:${params.checkOut}:${params.childAge1 || ''}:${params.childrenCount || 0}:${params.currency || 'USD'}:${params.customerIP}:${params.iata}:${params.lang || 'en_US'}:${params.waitForResult || 0}`;
+    const signatureString = `${HOTELLOOK_API_KEY}:${HOTELLOOK_MARKER}:${params.adultsCount}:${params.checkIn}:${params.checkOut}:${params.childAge1 || ''}:${params.childrenCount || 0}:${params.customerIP}:${params.iata}:${params.lang || 'en_US'}:${params.waitForResult || 0}`;
     return crypto.createHash('md5').update(signatureString).digest('hex');
 };
 
