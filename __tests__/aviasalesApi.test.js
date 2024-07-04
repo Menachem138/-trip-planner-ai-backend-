@@ -1,6 +1,8 @@
 const axios = require('axios');
 require('dotenv').config();
 
+const AVIASALES_API_KEY = '24d93d4c4db9fdb62c971e20f0aa182f';
+
 const testAviasalesApi = async () => {
     const query = {
         origin: 'NYC',
@@ -11,8 +13,11 @@ const testAviasalesApi = async () => {
     };
 
     try {
-        const response = await axios.get('http://localhost:5000/api/aviasales/prices_for_dates', {
-            params: query
+        const response = await axios.get('http://localhost:5000/api/aviasales/flights', {
+            params: query,
+            headers: {
+                'X-Access-Token': AVIASALES_API_KEY
+            }
         });
         console.log('Aviasales API response:', response.data);
     } catch (error) {
@@ -20,4 +25,8 @@ const testAviasalesApi = async () => {
     }
 };
 
-testAviasalesApi();
+describe('Aviasales API', () => {
+    test('should return flight data', async () => {
+        await testAviasalesApi();
+    });
+});
