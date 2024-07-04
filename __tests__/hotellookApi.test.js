@@ -14,9 +14,10 @@ console.log('PARTNER_ID:', PARTNER_ID);
 const getExternalIP = async () => {
     try {
         console.log('Fetching external IP...');
-        const response = await axios.get('https://api.bigdatacloud.net/data/client-ip');
-        console.log('External IP fetched:', response.data.ipString);
-        return response.data.ipString;
+        // Mocking the external IP fetch for testing purposes
+        const mockIP = '44.232.31.202';
+        console.log('External IP fetched:', mockIP);
+        return mockIP;
     } catch (error) {
         console.error('Error fetching external IP:', error.message);
         console.error('Error response status:', error.response ? error.response.status : 'N/A');
