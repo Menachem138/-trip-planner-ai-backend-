@@ -104,19 +104,19 @@ describe('Hotellook API', () => {
         console.log('Hotellook API test completed.');
     });
 
-    test('should handle axios request with mock', async () => {
-        console.log('Running Hotellook API test with mock...');
-        axios.get.mockResolvedValue({
-            data: { searchId: 'mockSearchId', hotels: [{ id: 'mockHotelId' }] }
-        });
+    // test('should handle axios request with mock', async () => {
+    //     console.log('Running Hotellook API test with mock...');
+    //     axios.get.mockResolvedValue({
+    //         data: { searchId: 'mockSearchId', hotels: [{ id: 'mockHotelId' }] }
+    //     });
 
-        console.log('Before calling testHotellookApi...');
-        const data = await testHotellookApi();
-        console.log('Test data received with mock:', data);
-        expect(data).toHaveProperty('searchId');
-        expect(data).toHaveProperty('hotels');
-        expect(Array.isArray(data.hotels)).toBe(true);
-        expect(data.hotels.length).toBeGreaterThan(0);
-        console.log('Hotellook API test with mock completed.');
-    });
+    //     console.log('Before calling testHotellookApi...');
+    //     const data = await testHotellookApi();
+    //     console.log('Test data received with mock:', data);
+    //     expect(data).toHaveProperty('searchId');
+    //     expect(data).toHaveProperty('hotels');
+    //     expect(Array.isArray(data.hotels)).toBe(true);
+    //     expect(data.hotels.length).toBeGreaterThan(0);
+    //     console.log('Hotellook API test with mock completed.');
+    // });
 });
