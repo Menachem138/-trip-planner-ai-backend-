@@ -17,7 +17,7 @@ const testHotellookApi = async () => {
     };
 
     try {
-        const response = await axios.get('http://localhost:5000/api/hotellook/search', {
+        const response = await axios.get('https://yasen.hotellook.com/api/v2/cache.json', {
             params: {
                 ...query,
                 marker: HOTELLOOK_MARKER,
@@ -28,8 +28,10 @@ const testHotellookApi = async () => {
             }
         });
         console.log('Hotellook API response:', response.data);
+        return response.data;
     } catch (error) {
         console.error('Error testing Hotellook API:', error);
+        throw error;
     }
 };
 
@@ -40,6 +42,10 @@ const generateSignature = (params) => {
 
 describe('Hotellook API', () => {
     test('should return hotel data', async () => {
-        await testHotellookApi();
+        const data = await testHotellookApi();
+        expect(data).toHaveProperty('searchId');
+        expect(data).toHaveProperty('hotels');
+        expect(Array.isArray(data.hotels)).toBe(true);
+        expect(data.hotels.length).toBeGreaterThan(0);
     });
 });
