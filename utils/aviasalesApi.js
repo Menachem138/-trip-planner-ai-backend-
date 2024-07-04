@@ -1,6 +1,7 @@
 const axios = require('axios');
 
 const AVIASALES_API_KEY = process.env.AVIASALES_API_KEY;
+const PARTNER_ID = process.env.PARTNER_ID;
 
 const aviasalesApi = axios.create({
     baseURL: 'https://api.travelpayouts.com/aviasales/v3/',
@@ -23,7 +24,8 @@ const searchFlights = async (query) => {
                 limit: query.limit || 30,
                 page: query.page || 1,
                 sorting: query.sorting || 'price',
-                unique: query.unique || false
+                unique: query.unique || false,
+                partner_id: PARTNER_ID
             }
         });
         return response.data;

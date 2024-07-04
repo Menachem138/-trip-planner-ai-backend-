@@ -3,6 +3,7 @@ const crypto = require('crypto');
 
 const HOTELLOOK_API_KEY = process.env.HOTELLOOK_API_KEY;
 const HOTELLOOK_MARKER = process.env.HOTELLOOK_MARKER;
+const PARTNER_ID = process.env.PARTNER_ID;
 
 const hotellookApi = axios.create({
     baseURL: 'https://engine.hotellook.com/api/v2/',
@@ -18,6 +19,7 @@ const searchHotels = async (query) => {
         const params = {
             ...query,
             marker: HOTELLOOK_MARKER,
+            partner_id: PARTNER_ID,
             signature: generateSignature(query)
         };
         const response = await hotellookApi.get('search/start.json', {
