@@ -20,9 +20,17 @@ const testAviasalesApi = async () => {
             }
         });
         console.log('Aviasales API response:', response.data);
+        console.log('Aviasales API status:', response.status);
+        console.log('Aviasales API headers:', response.headers);
         return response.data;
     } catch (error) {
-        console.error('Error testing Aviasales API:', error);
+        if (error.response) {
+            console.error('Error response data:', error.response.data);
+            console.error('Error response status:', error.response.status);
+            console.error('Error response headers:', error.response.headers);
+        } else {
+            console.error('Error message:', error.message);
+        }
         throw error;
     }
 };

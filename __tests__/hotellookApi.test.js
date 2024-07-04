@@ -28,9 +28,17 @@ const testHotellookApi = async () => {
             }
         });
         console.log('Hotellook API response:', response.data);
+        console.log('Hotellook API status:', response.status);
+        console.log('Hotellook API headers:', response.headers);
         return response.data;
     } catch (error) {
-        console.error('Error testing Hotellook API:', error);
+        if (error.response) {
+            console.error('Error response data:', error.response.data);
+            console.error('Error response status:', error.response.status);
+            console.error('Error response headers:', error.response.headers);
+        } else {
+            console.error('Error message:', error.message);
+        }
         throw error;
     }
 };
