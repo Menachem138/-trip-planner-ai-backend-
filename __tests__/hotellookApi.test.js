@@ -45,6 +45,7 @@ const testHotellookApi = async () => {
         console.log('Request marker:', HOTELLOOK_MARKER);
         console.log('Request partner_id:', PARTNER_ID);
         console.log('Request signature:', generateSignature(query));
+        console.log('Making axios request...');
         const response = await axios.get('https://engine.hotellook.com/api/v2/search/start.json', {
             params: {
                 ...query,
@@ -57,6 +58,7 @@ const testHotellookApi = async () => {
             },
             timeout: 10000 // Set timeout to 10 seconds
         });
+        console.log('Axios request completed.');
         console.log('Hotellook API response:', response.data);
         console.log('Hotellook API status:', response.status);
         console.log('Hotellook API headers:', response.headers);
